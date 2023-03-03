@@ -5,10 +5,38 @@
   "version": "0.1.0",
   "title": "Wp Awesome Block",
   "category": "widgets",
-  "icon": "smiley",
+  "icon": "text-page",
   "description": "Example block scaffolded with Create Block tool.",
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Key Takeaways"
+    },
+    "description": {
+      "type": "string",
+      "source": "html",
+      "selector": "div.description",
+      "default": "Lorem ipsum..."
+    }
+  },
   "supports": {
-    "html": false
+    "html": false,
+    "color": {
+      "text": true,
+      "background": true,
+      "enableContrastChecker": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "className": true,
+    "align": true
   },
   "textdomain": "wp-awesome-block",
   "editorScript": "file:./index.js",

@@ -3,15 +3,15 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
-import { __ } from '@wordpress/i18n';
-
+import { __ } from "@wordpress/i18n";
+import { TextControl } from "@wordpress/components";
 /**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -19,7 +19,7 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './editor.scss';
+import "./editor.scss";
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -29,13 +29,21 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit(props) {
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
-				'Wp Awesome Block – hello from the editor!',
-				'wp-awesome-block'
-			) }
-		</p>
+		<div {...useBlockProps()}>
+			<TextControl
+				help="Help text to explain the input."
+				label="Label Text"
+				onChange={(value ) =>  props.setAttributes({title: value})}
+				value={props.attributes.title}
+			/>
+			<RichText
+				tagName="div.description"
+				value={ props.attributes.description}
+				onChange = {(value) => props.setAttributes({description: value})}		
+				placeholder={ __( 'Write description here...' ) }		
+			/>
+		</div>
 	);
 }

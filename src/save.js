@@ -15,10 +15,13 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
-export default function save() {
+export default function save( props ) {
 	return (
-		<p { ...useBlockProps.save() }>
-			{ 'Wp Awesome Block – hello from the saved content!' }
-		</p>
+		<div { ...useBlockProps.save() }>
+			{ `${props.attributes.title}` }
+			<div className='description'>
+			{ `${props.attributes.description}` }
+			</div>
+		</div>
 	);
 }
